@@ -1,0 +1,50 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+     rel="stylesheet"
+     />
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap"
+     rel="stylesheet"
+     />
+    <!-- MDB -->
+    <link
+    href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.1/mdb.min.css"
+    rel="stylesheet"
+    />  
+        <link rel="shortcut icon" type="image/x-icon" href="{% static 'assets\img\news-logo-title.png' %}">
+        <title>  {% block Title %} <!-- Headlines Here --> {% endblock Title %}</title>
+</head>
+    <style>
+        body{
+            background-color: rgb(255, 255, 255);
+            color: rgb(44, 44, 44);
+        }
+        *{
+            font-family: 'Poppins','sans-serif';
+            
+        }
+        h5:hover{
+            text-decoration: underline;
+            
+        }
+    </style>
+
+    <body>
+        {% block Content %}{% endblock Content %}
+    </body>
+
+
+    <!-- MDB -->
+    <script
+    type="text/javascript"
+    src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.1/mdb.min.js"
+    ></script>
+
+
+</html>

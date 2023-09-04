@@ -1,0 +1,560 @@
+{% extends 'base.html' %}
+
+    <!-- Headline Title Here -->
+    {% block Title %}Nx-Live | News-headlines {% endblock Title %}
+
+    <!-- Healines Content Here -->
+    {% block Content %}
+    {% include 'includes/navbar.html' %}
+    <div class="container my-5">
+
+        <div class="row">
+            <div class="col-md-4 mb-5">
+                <a href="{% url 'ReadArticles' 'catenews' %}"><h2 class="text-left" style="color: rgb(9, 143, 226); font-size: 21px;"> India ></h2></a>
+                <hr class="mb-5">
+                
+                {% if messages %}
+                {% for msg in messages %}
+                <div class="alert alert-success" role="alert">
+                  {{msg}}!
+                </div>
+                {% endfor %}
+                {% endif %}
+
+                {% for news in catenews %}
+                <div class="card border-0 shadow-0 rounded-2 mt-2">
+                <img
+                src="{{news.article_image}}"
+                class="card-img-top"
+                alt="..."
+                />
+                <div class="card-body p-3 rounded-2">
+                <h5 class="mb-3" style="color: black; font-weight: 700; font-size: 16px;">{{forloop.counter}} - {{news.heading |truncatechars:60}}</h5>
+                <div class="d-flex">
+                    <img
+                    src="{{news.News_Icon}}"
+                    class="rounded-circle"
+                    height="35"
+                    width="35"
+                    alt=""
+                    loading="lazy"
+                    style="object-fit: contain;"
+                    />
+                    <div class="d-flex align-items-center w-100 ps-3">
+                    <div class="w-100">
+                        <h6 class="link-dark text-muted mb-0" style="font-size: 13px;">{{news.Upload_Time}}</h6>
+                        <a href="{{news.domian}}" class="stretched-link text-muted"
+                        ><p class="mb-0 small" style="font-size: 12px;">Read Article</p></a
+                        >
+                    </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+            {% endfor %}
+            </div>
+
+            <div class="col-6 mb-5">
+
+            <a href="{% url 'ReadArticles' 'news' %}"><h2 class="text-left" style="color: rgb(11, 136, 232); font-size: 21px;"> Top Stories ></h2></a>
+            <hr class="mb-5">
+           
+            {% for  article in news %}
+            <div class="card border-0 shadow-0 rounded-2 mb-3 mt-5 border-5">
+                <div class="d-flex g-0">
+                <div class="col-md-4">
+                    <img
+                    src="{{article.article_image}}"
+                    class="w-100"
+                    alt="..."
+                    />
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body px-3 pt-2 rounded-2">
+                   <a href="{{article.domian}}" style="color: rgb(68, 68, 68);"> <h5 class="mb-3" style="font-weight: 700; font-size: 16px">{{forloop.counter}} - {{article.heading |truncatechars:60}}</h5></a>
+                    <div class="d-flex position-absolute" style="bottom: 0;">
+                        <img
+                        src="{{article.News_Icon}}"
+                        class="rounded-circle"
+                        height="35"
+                        width="35"
+                        alt=""
+                        loading="lazy"
+                        style="object-fit: contain;"
+                        />
+                        <div class="d-flex align-items-center w-100 ps-3 pb-2">
+                        <div class="w-100">
+                            <h6 class="link-dark text-muted mb-0" style="font-size: 13px;">{{article.Upload_Time}}</h6>
+                            <a href="{{article.domian}}" class="stretched-link text-muted"
+                            ><p class="mb-0 small" style="font-size: 13px;"></p>Read Full Article</a
+                            >
+                        </div>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+            {% endfor %}
+
+            
+            </div>
+
+            <div class="col-2">
+              <div class="sticky-top">
+                <div id="scrollspy">
+                  <ul class="nav flex-column nav-pills menu-sidebar">
+                    <li class="nav-item mt-2">
+                      <a class="nav-link active" href="#section-introduction">India </a>
+                    </li>
+                    <li class="nav-item mt-2">
+                      <a class="nav-link active" href="#section-introduction">Top Stories </a>
+                    </li>
+                    <li class="nav-item mt-2">
+                      <a class="nav-link active" href="#Local_News">Local news </a>
+                    </li>
+                    <li class="nav-item mt-2">
+                      <a class="nav-link active" href="#section-introduction">Buisness News </a>
+                    </li>
+                    <li class="nav-item mt-2">
+                      <a class="nav-link active" href="#Entertainment_News">Entertainment News </a>
+                    </li>
+                    <li class="nav-item mt-2">
+                      <a class="nav-link active" href="#World_News">World News </a>
+                    </li>
+                    <li class="nav-item mt-2">
+                      <a class="nav-link active" href="#Technology_News">Technology News </a>
+                    </li>
+                    <li class="nav-item mt-2">
+                      <a class="nav-link active" href="#Sports_News">Sports News </a>
+                    </li>
+                    
+                  </ul>
+                </div>
+              </div>
+            </div>
+        </div>
+
+        <hr class="my-5" />
+
+        <!-- New ROw Local News  -->
+        <div class="row">
+            <!-- Navs -->
+            <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                <!-- Overview tab -->
+                <li class="nav-item" role="presentation">
+                <a
+                    class="nav-link active"
+                    id="pills-overview-tab"
+                    data-mdb-toggle="pill"
+                    href="#pills-overview"
+                    role="tab"
+                    aria-controls="pills-overview"
+                    aria-selected="true"
+                    >Local News</a
+                >
+                </li>
+                <!-- Overview tab -->
+
+                <!-- Api tab -->
+                <li class="nav-item" role="presentation">
+                <a
+                    class="nav-link"
+                    id="pills-api-tab"
+                    data-mdb-toggle="pill"
+                    href="#pills-api"
+                    role="tab"
+                    aria-controls="pills-api"
+                    aria-selected="false"
+                    >Buisness News</a
+                >
+                </li>
+                <!-- Api tab -->
+            </ul>
+      <!-- Navs -->
+
+      <!-- Panels -->
+      <div class="tab-content mt-4" id="pills-tabContent">
+        <!-- Overview panel -->
+        <div
+          class="tab-pane fade show active"
+          id="pills-overview"
+          role="tabpanel"
+          aria-labelledby="pills-overview-tab"
+        >
+          <!--Grid row-->
+          <div class="row">
+            <!--Grid column-->
+            <div class="col-md-10 mb-4">
+              <!--Section: Docs content-->
+              <section>
+                <!--Section: Introduction-->
+                <section id="Local_News">
+                  <!-- Main title -->
+                  <a href="{% url 'ReadArticles' 'localNews' %}"><h2 class="h1 fw-bold" style="font-size: 21px;"> Local News >></h2></a>
+
+                  {% for news in  localNews %}
+                  <!-- Seo title -->
+                  <div class="card  shadow-0 rounded-2 mb-3 mt-3">
+                    <div class="d-flex g-0">
+                    
+                    <div class="col-md-12">
+                        <div class="card-body px-2  rounded-2" style="background-color: transparent; border-radius: 3px">
+                       
+                        <div class="d-flex position-absolute" style="bottom: 0; border: 0">
+                            <img
+                            src="{{news.article_image}}"
+                            class="rounded-circle"
+                            height="45"
+                            width="45"
+                            alt=""
+                            loading="lazy"
+                            style="object-fit: cover;"
+                            />
+                            <div class="d-flex align-items-center w-100 ps-3 pb-1 border-0">
+                            <div class="w-100">
+                                <a href="{{news.domian}}"><h5 class="link-dark mb-0" style="font-size: 16px;" >{{news.heading |truncatechars:90}}</h5></a>
+                            </div>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                    </div>
+                    </div>
+
+                  <hr class="my-2" />
+
+                  {% endfor %}
+                </section>
+                <!--Section: Introduction-->
+
+                
+
+              </section>
+              <!--Section: Docs content-->
+            </div>
+            <!--Grid column-->
+
+            <!--Grid column-->
+            <div class="col-md-2 mb-4">
+              <div class="sticky-top">
+                <div id="scrollspy">
+                  <ul class="nav flex-column nav-pills menu-sidebar">
+                    <li class="nav-item">
+                      <a class="nav-link active" href="#Local_News">Latest Local News</a>
+                    </li>
+                    
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <!--Grid column-->
+          </div>
+          <!--Grid row-->
+        </div>
+        <!-- Overview panel -->
+
+        <!-- API panel -->
+        <div
+          class="tab-pane fade show active"
+          id="pills-api"
+          role="tabpanel"
+          aria-labelledby="pills-api-tab"
+        >
+          <!--Grid row-->
+          <div class="row">
+            <!--Grid column-->
+            <div class="col-md-10 mb-4">
+              <!--Section: Docs content-->
+              <section>
+                <!--Section: Introduction-->
+                <section id="section-introduction">
+                  <!-- Main title -->
+                  <a href="{% url 'ReadArticles' 'BuisnessNews' %}" ><h2 class="h1 font-weight-bold" style="font-size: 21px;">Buisness News</h2></a>
+
+                  {% for news in  BuisnessNews %}
+                  <!-- Seo title -->
+                  <div class="card  shadow-0 rounded-2 mb-3 mt-3">
+                    <div class="d-flex g-0">
+                    
+                    <div class="col-md-12">
+                        <div class="card-body px-3 rounded-2">
+                       
+                        <div class="d-flex position-absolute" style="bottom: 0; border: 0">
+                            <img
+                            src="{{news.article_image}}"
+                            class="rounded-circle"
+                            height="45"
+                            width="45"
+                            alt=""
+                            loading="lazy"
+                            style="object-fit: cover;"
+                            />
+                            <div class="d-flex align-items-center w-100 ps-3 pb-2 border-0">
+                            <div class="w-100">
+                                <a href="{{news.domian}}"><h5 class="link-dark mb-0" style="font-size: 16px;" >{{news.heading  |truncatechars:90}}</h5></a>
+                            </div>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                    </div>
+                    </div>
+
+                  <hr class="my-2" />
+
+                  {% endfor %}
+                </section>
+                <!--Section: Introduction-->
+
+                <hr class="my-5" />
+
+              </section>
+              <!--Section: Docs content-->
+            </div>
+            <!--Grid column-->
+
+            <!--Grid column-->
+            <div class="col-md-2 mb-4">
+              <div class="sticky-top">
+                <div id="scrollspy">
+                  <ul class="nav flex-column nav-pills menu-sidebar">
+                    <li class="nav-item">
+                      <a class="nav-link active" href="#section-introduction">Latest Buisness News</a>
+                    </li>
+                    
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <!--Grid column-->
+
+
+            <section>
+              <a href="{% url 'ReadArticles' 'EntertainmentNews' %}"><h2 class="h1 font-weight-bold" style="font-size: 21px;" id="Entertainment_News">Entertainment News ></h2></a>
+      
+              <!---Grid row-->
+              <div class="row px-3">
+                <!--Grid column-->
+              
+                
+                  {% for picks in EntertainmentNews %}
+                  <div class="col-md-6 mb-4 px-3">
+                    <div class="alert alert-success" role="alert">
+                      <img
+                            src="{{picks.article_image}}"
+                            class="rounded-circle"
+                            height="45"
+                            width="45"
+                            alt=""
+                            loading="lazy"
+                            style="object-fit: cover;"
+                            />
+                     
+                        {{picks.heading|truncatechars:60}}
+                      
+                      <hr />
+                      <p class="mb-0">
+                       {{picks.Upload_Time}}
+                      </p>
+                    </div>
+                  </div>
+                  {% endfor %}
+
+                  
+              
+                
+            </div>
+              <!--Grid row-->
+            </section>
+            <hr class="my-5" />
+            
+            <!-- World News  -->
+            <div class="row">
+
+              <div class="col-6 mb-5">
+  
+                <a href="{% url 'ReadArticles' 'worldNews' %}"><h2 class="text-left" style="color: rgb(11, 136, 232); font-size: 21px;" id="World_News"> World News ></h2></a>
+                <hr class="mb-5">
+               
+                {% for  article in worldNews %}
+                <div class="card border-0 shadow-0 rounded-2 mb-3 mt-5 border-5">
+                    <div class="d-flex g-0">
+                    <div class="col-md-4">
+                        <img
+                        src="{{article.article_image}}"
+                        class="w-100"
+                        alt="..."
+                        />
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body px-3 pt-2 rounded-2">
+                       <a href="" style="color: rgb(68, 68, 68);"> <h5 class="mb-3" style="font-weight: 700; font-size: 16px;">{{forloop.counter}} - {{article.heading |truncatechars:60}}</h5></a>
+                        <div class="d-flex position-absolute" style="bottom: 0;">
+                            <img
+                            src="{{article.News_Icon}}"
+                            class="rounded-circle"
+                            height="35"
+                            width="35"
+                            alt=""
+                            loading="lazy"
+                            style="object-fit: contain;"
+                            />
+                            <div class="d-flex align-items-center w-100 ps-3 pb-2">
+                            <div class="w-100">
+                                <h6 class="link-dark text-muted mb-0" style="font-size: 13px;">{{article.Upload_Time}}</h6>
+                                <a href="{{article.domian}}" class="stretched-link text-muted"
+                                ><p class="mb-0 small" style="font-size: 13px;"></p>Read Full Article</a
+                                >
+                            </div>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+                {% endfor %}
+    
+                
+                </div>
+
+              <div class="col-md-4 mb-5">
+                  <a href="{% url 'ReadArticles' 'TechnologyNews' %}"><h2 class="text-left" style="color: rgb(11, 136, 232); font-size: 21px;" id="Technology_News"> Technology News ></h2></a>
+                  <hr class="mb-5">
+                  
+  
+  
+                  {% for news in TechnologyNews %}
+                  <div class="card border-0 shadow-0 rounded-2 mt-2">
+                  <img
+                  src="{{news.article_image}}"
+                  class="card-img-top"
+                  alt="..."
+                  />
+                  <div class="card-body p-3 rounded-2">
+                  <h5 class="mb-3" style="color: black; font-weight: 700; font-size: 16px;">{{forloop.counter}} - {{news.heading |truncatechars:60}}</h5>
+                  <div class="d-flex">
+                      <img
+                      src="{{news.News_Icon}}"
+                      class="rounded-circle"
+                      height="35"
+                      width="35"
+                      alt=""
+                      loading="lazy"
+                      style="object-fit: contain;"
+                      />
+                      <div class="d-flex align-items-center w-100 ps-3">
+                      <div class="w-100">
+                          <h6 class="link-dark text-muted mb-0" style="font-size: 13px;">{{news.Upload_Time}}</h6>
+                          <a href="{{news.domian}}" class="stretched-link text-muted"
+                          ><p class="mb-0 small" style="font-size: 13px;">Read Article</p></a
+                          >
+                      </div>
+                      </div>
+                  </div>
+                  </div>
+              </div>
+              {% endfor %}
+              </div>
+  
+              
+  
+              <div class="col-2">
+                <div class="sticky-top">
+                  <div id="scrollspy">
+                    <ul class="nav flex-column nav-pills menu-sidebar">
+                      <li class="nav-item mt-2">
+                        <a class="nav-link active" href="#section-introduction">India </a>
+                      </li>
+                      <li class="nav-item mt-2">
+                        <a class="nav-link active" href="#section-introduction">Top Stories </a>
+                      </li>
+                      <li class="nav-item mt-2">
+                        <a class="nav-link active" href="#Local_News">Local news </a>
+                      </li>
+                      <li class="nav-item mt-2">
+                        <a class="nav-link active" href="#section-introduction">Buisness News </a>
+                      </li>
+                      <li class="nav-item mt-2">
+                        <a class="nav-link active" href="#Entertainment_News">Entertainment News </a>
+                      </li>
+                      <li class="nav-item mt-2">
+                        <a class="nav-link active" href="#World_News">World News </a>
+                      </li>
+                      <li class="nav-item mt-2">
+                        <a class="nav-link active" href="#Technology_News">Technology News </a>
+                      </li>
+                      <li class="nav-item mt-2">
+                        <a class="nav-link active" href="#Sports_News">Sports News </a>
+                      </li>
+                      
+                    </ul>
+                  </div>
+                </div>
+              </div>
+          </div>
+
+
+            <!-- End World news  -->
+            <hr class="my-5" />
+
+            <!-- Sports News  -->
+            <section>
+              <a href="{% url 'ReadArticles' 'SportsNews' %}"><h2 class="h1 font-weight-bold" style="font-size: 21px;" id="Sports_News">Sports News</h2></a>
+              
+      
+              <!---Grid row-->
+              <div class="row px-3">
+                <!--Grid column-->
+              
+                
+                  {% for picks in SportsNews %}
+                  <div class="col-md-6 mb-4 px-2">
+                    <div class="alert alert-success" role="alert">
+                      <img
+                            src="{{picks.article_image}}"
+                            class="rounded-circle"
+                            height="45"
+                            width="45"
+                            alt=""
+                            loading="lazy"
+                            style="object-fit: cover;"
+                            />
+                     
+                        <a href="{{picks.domian}}">{{picks.heading|truncatechars:60}}</a>
+                      
+                      <hr />
+                      <p class="mb-0">
+                       <h4 style="font-size: 13px;">{{picks.Upload_Time}}</h4>
+                      </p>
+                    </div>
+                  </div>
+                  {% endfor %}
+
+                  
+              
+                
+            </div>
+              <!--Grid row-->
+            </section>
+            <hr class="my-5" />
+            <!-- End Sports News  -->
+
+
+          </div>
+          <!--Grid row-->
+        </div>
+        <!-- API panel -->
+      </div>
+      <!-- Panels -->
+        </div>
+        <div class="row">
+          <div class="text-center" >
+            <h4 style="font-size: 17px;">Stay Connected With Us For Lates News</h4>
+          </div>
+        </div>
+    </div>
+
+
+
+    {% endblock Content %}
